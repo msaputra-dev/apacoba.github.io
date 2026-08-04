@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUSIC_02 — Musik Favorit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+  <div class="particles" id="particles"></div>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-id"><span class="dot"></span>USER//PROFILE-01</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Profil</a></li>
+      <li><a href="music.html" class="active">Musik</a></li>
+    </ul>
+    <div class="nav-status">SYSTEM <span class="ok">● ONLINE</span></div>
+  </nav>
+
+  <main>
+    <p class="eyebrow">Koleksi Suara</p>
+    <h1 class="name" style="font-size:clamp(34px,5vw,52px)">Musik Favorit</h1>
+
+    <div class="player player-region" id="playerRegion" style="margin-top:36px;">
+      <div class="cover-wrap">
+        <div class="cover" id="coverBox">
+          <div class="spin-ring"></div>
+          <!-- cover art SVG per track, swapped by JS -->
+          <svg id="coverSvg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#4de8ff"/>
+                <stop offset="100%" stop-color="#b46bff"/>
+              </linearGradient>
+            </defs>
+            <rect width="200" height="200" fill="#0e1524"/>
+            <circle cx="100" cy="100" r="60" fill="none" stroke="url(#g1)" stroke-width="2"/>
+            <circle cx="100" cy="100" r="6" fill="url(#g1)"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="track-meta">
+        <p class="track-eyebrow">Sedang Diputar</p>
+        <h2 class="track-title" id="trackTitle">Judul Lagu 1</h2>
+        <p class="track-artist" id="trackArtist">Nama Artis</p>
+
+        <div class="waveform" id="waveform"></div>
+
+        <div class="progress-row">
+          <span id="timeCurrent">0:00</span>
+          <div class="progress-track" id="progressTrack" role="slider" aria-label="Posisi lagu" tabindex="0">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span id="timeDuration">0:00</span>
+        </div>
+
+        <div class="controls">
+          <button class="ctrl-btn" id="prevBtn" aria-label="Lagu sebelumnya">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zM20 6v12L9 12z"/></svg>
+          </button>
+          <button class="play-btn" id="playBtn" aria-label="Putar / jeda">
+            <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <button class="ctrl-btn" id="nextBtn" aria-label="Lagu berikutnya">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM4 6v12l11-6z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="playlist" id="playlist"></div>
+
+    <audio id="audio" preload="metadata"></audio>
+  </main>
+
+  <footer>
+    <span>© 2026 NAMA ANDA</span>
+    <span>PROFILE_01 / MUSIC_02</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

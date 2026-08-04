@@ -31,10 +31,10 @@
   // cover: dua warna gradient untuk artwork placeholder — ganti jadi
   //        <img src="assets/cover-kamu.jpg"> di renderCover() bila punya foto asli.
   const tracks = [
-    { title: 'Judul Lagu 1', artist: 'Nama Artis 1', src: 'assets/track1.mp3', colors: ['#4de8ff', '#b46bff'] },
-    { title: 'Judul Lagu 2', artist: 'Nama Artis 2', src: 'assets/track2.mp3', colors: ['#b46bff', '#4dffb0'] },
-    { title: 'Judul Lagu 3', artist: 'Nama Artis 3', src: 'assets/track3.mp3', colors: ['#4dffb0', '#4de8ff'] },
-    { title: 'Judul Lagu 4', artist: 'Nama Artis 4', src: 'assets/track4.mp3', colors: ['#ff9d4d', '#b46bff'] },
+    { title: 'Champagne Supernova', artist: 'oasis', src: 'assets/lagu1.mp3', cover: 'assets/cover1.jpg', colors: ['#4de8ff', '#b46bff'] },
+    { title: 'Sesi Potret', artist: 'eńau,Ari Lesmana', src: 'assets/lagu2.mp3', cover: 'assets/cover2.jpg', colors: ['#b46bff', '#4dffb0'] },
+    { title: 'Tarot', artist: '.feast', src: 'assets/lagu3.mp3', cover: 'assets/cover3.jpg', colors: ['#4dffb0', '#4de8ff'] },
+    { title: 'Timeless', artist: 'The Weeknd,Playboi Carti', src: 'assets/lagu4.mp3', cover: 'assets/cover4.jpg', colors: ['#ff9d4d', '#b46bff'] },
   ];
 
   let current = 0;
@@ -69,25 +69,16 @@
   }
 
   function renderCover(track){
-    // Placeholder artwork berbentuk cincin gradient dengan inisial lagu.
-    // Ganti isi <svg> ini dengan <img src="..."> bila punya foto sampul asli.
-    const [c1, c2] = track.colors;
-    els.coverSvg.innerHTML = `
-      <defs>
-        <linearGradient id="g-${current}" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="${c1}"/>
-          <stop offset="100%" stop-color="${c2}"/>
-        </linearGradient>
-      </defs>
-      <rect width="200" height="200" fill="#0e1524"/>
-      <circle cx="100" cy="100" r="60" fill="none" stroke="url(#g-${current})" stroke-width="2"/>
-      <circle cx="100" cy="100" r="6" fill="url(#g-${current})"/>
-      <text x="100" y="108" text-anchor="middle" font-family="Rajdhani, sans-serif"
-            font-size="30" font-weight="700" fill="${c1}" opacity="0.85">
-        ${track.title.trim().charAt(0).toUpperCase()}
-      </text>
-    `;
+  els.coverBox.querySelector('#coverSvg')?.remove();
+  let img = els.coverBox.querySelector('.cover-img');
+  if(!img){
+    img = document.createElement('img');
+    img.className = 'cover-img';
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;position:relative;z-index:1;';
+    els.coverBox.appendChild(img);
   }
+  img.src = track.cover;
+}
 
   function buildWaveform(){
     els.waveform.innerHTML = '';
@@ -110,11 +101,7 @@
       row.innerHTML = `
         <span class="track-idx">${String(i+1).padStart(2,'0')}</span>
         <div class="track-thumb">
-          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-            <rect width="48" height="48" fill="#0e1524"/>
-            <circle cx="24" cy="24" r="14" fill="none" stroke="${t.colors[0]}" stroke-width="1.5"/>
-            <circle cx="24" cy="24" r="2.5" fill="${t.colors[1]}"/>
-          </svg>
+          <img src="${t.cover}" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div>
           <div class="track-info-title">${t.title}</div>
